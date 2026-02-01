@@ -44,7 +44,7 @@
           <div class="text-center pt-3 pb-3">
             <span class="db">
               <img src="assets/images/icon.png" alt="logo" class="light-logo" />
-              <b class="text-white">POS</b>
+              <b class="text-white">POS Login inventory</b>
             </span>
           </div>
           <!-- Form -->
