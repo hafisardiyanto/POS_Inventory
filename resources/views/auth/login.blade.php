@@ -85,7 +85,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <button class="btn btn-success float-end text-white" type="submit">
-                    Login
+                    Login POS inventory
                   </button>
                 </div>
               </div>
