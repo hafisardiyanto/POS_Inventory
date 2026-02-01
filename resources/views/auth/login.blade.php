@@ -7,7 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>{{ config('APP_NAME', 'POS') }}</title>
+  <title>{{ config('APP_NAME', 'POS Inventor') }}</title>
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
   <!-- Custom CSS -->
@@ -85,9 +85,9 @@
               <div class="col-12">
                 <div class="form-group">
                   <button class="btn btn-success float-end text-white" type="submit">
-                    Login POS inventory
+                    Login 
                   </button>
-                </div>
+                </div>  
               </div>
             </div>
           </form>
