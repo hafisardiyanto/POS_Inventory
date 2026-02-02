@@ -45,7 +45,6 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('transaction')->group(function () {
         Route::get('/get-invoice', [TransactionController::class, 'get_invoice'])->name('transaction.get_invoice');
-        Route::get('/get-items', [TransactionController::class, 'get_items'])->name('transaction.get_items');
         Route::get('/transaction/items', [TransactionController::class, 'items_html']);
         Route::get('/transaction/items-json', [TransactionController::class, 'items_json']);
         Route::post('/save', [TransactionController::class, 'save_transaction'])->name('transaction.save');
