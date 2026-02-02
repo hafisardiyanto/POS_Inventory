@@ -44,13 +44,22 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::prefix('transaction')->group(function () {
-        Route::get('/get-invoice', [TransactionController::class, 'get_invoice'])->name('transaction.get_invoice');
-        Route::get('/transaction/items', [TransactionController::class, 'items_html']);
-        Route::get('/transaction/items-json', [TransactionController::class, 'items_json']);
-        Route::post('/save', [TransactionController::class, 'save_transaction'])->name('transaction.save');
-    });
-    Route::resource('transaction', TransactionController::class)->except('create', 'edit', 'update');
+    Route::prefix('transaction')->group(function () {
+    Route::get('/invoice', [TransactionController::class, 'get_invoice'])
+        ->name('transaction.get_invoice');
 
+    Route::get('/items', [TransactionController::class, 'items_html'])
+        ->name('transaction.items');
+
+    Route::get('/items-json', [TransactionController::class, 'items_json'])
+        ->name('transaction.items_json');
+
+    Route::post('/save', [TransactionController::class, 'save_transaction'])
+        ->name('transaction.save');
+});
+        Route::get('/', [TransactionController::class, 'index'])->name('transaction.index');
+        Route::post('/', [TransactionController::class, 'store'])->name('transaction.store');
+    });
     Route::prefix('cart')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
         Route::post('/', [CartController::class, 'store'])->name('cart.store');
