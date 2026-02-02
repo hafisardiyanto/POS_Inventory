@@ -358,7 +358,7 @@
 
     function get_items(showModal = true) {
       $.ajax({
-        url: '{{ route('transaction.get_items') }}',
+        url: '{{ route('items_html') }}',
         type: 'GET',
         dataType: 'html',
         success: function(data) {
