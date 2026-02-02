@@ -358,7 +358,7 @@
 
     function get_items(showModal = true) {
       $.ajax({
-        url: '{{ route('transaction.items') }}',
+        url: '{{ route('transaction.get_items') }}',
         type: 'GET',
         dataType: 'html',
         success: function(data) {
@@ -515,34 +515,39 @@
     }
 
     function search_by_code() {
-  $.ajax({
-    url: '/transaction/items-json',
-    type: 'GET',
-    dataType: 'json',
-    success: function(all_items) {
-
-      let keyword = $('#product_name').val().toUpperCase();
-      let item = all_items.find(i => i.code === keyword);
-
-      if (item) {
-        $.ajax({
-          url: '/cart/' + item.code,
-          type: 'GET',
-          dataType: 'json',
-          success: function(data) {
-            $('#product_id').val(data.id);
-            $('#product_qty').focus();
-            count_stock();
+      $.ajax({
+        url: '{{ route('transaction.get_items') }}',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          json: true
+        },
+        success: function(all_items) {
+          var all_codes = [];
+          for (let i = 0; i < all_items.length; i++) {
+            all_codes.push(all_items[i].code);
           }
-        });
-      } else {
-        $('#product_id').val('');
-        $('#product_stock').val(0);
-      }
-    }
-  });
-}
 
+          if ($('#product_name').val() != '') {
+            if (all_codes.includes($('#product_name').val().toUpperCase())) {
+              $.ajax({
+                url: '/cart/' + $('#product_name').val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                  $('#product_id').val(data.id);
+                  $('#product_qty').focus();
+                  count_stock();
+                }
+              });
+            } else {
+              $('#product_id').val('');
+              $('#product_stock').val('0');
+            }
+          }
+        }
+      });
+    }
 
     function pay() {
       if (empty_cart()) return false;

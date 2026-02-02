@@ -121,19 +121,6 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function items_html(): View {
-    return view('transaction.items', [
-        'items' => Item::orderBy('name')->get()
-    ]);
-}
-
-public function items_json(): JsonResponse {
-    return response()->json(
-        Item::select('id', 'code', 'name')->get()
-    );
-}
-
-
     public function get_invoice(): string
     {
         if (count(Transaction::whereDate('created_at', Carbon::today())->get()) > 0) {
@@ -146,6 +133,4 @@ public function items_json(): JsonResponse {
         $invoice = env('INVOICE_PREFIX') . date('dmy') . str_pad($invoice, 4, "0", STR_PAD_LEFT);
         return json_encode(['invoice' => $invoice, 'invoice_no' => $invoice_no]);
     }
-
-
 }
