@@ -60,28 +60,45 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request): string
-    {
-        $payment_method_id = PaymentMethod::where('name', $request->payment_method)->first()->id;
+{
+    $request->validate([
+        'payment_method' => 'required',
+    ]);
 
-        $transaction = new Transaction();
-        $transaction->user_id = Auth::user()->id;
-        if ($request->customer_id != 0) {
-            $transaction->customer_id = $request->customer_id;
-        }
-        $transaction->invoice = $request->invoice;
-        $transaction->invoice_no = $request->invoice_no;
-        $transaction->total = $request->total;
-        $transaction->discount = $request->discount;
-        $transaction->payment_method_id = $payment_method_id;
-        $transaction->amount = $request->amount;
-        $transaction->change = $request->change;
-        $transaction->note = $request->note;
-        $transaction->save();
+    $paymentMethod = PaymentMethod::where('name', $request->payment_method)->first();
 
-        $this->move_cart($transaction);
-
-        return json_encode(['status' => 'success', 'message' => 'Transaksi berhasil']);
+    if (!$paymentMethod) {
+        return json_encode([
+            'status' => 'error',
+            'message' => 'Metode pembayaran tidak ditemukan'
+        ]);
     }
+
+    $transaction = new Transaction();
+    $transaction->user_id = Auth::id();
+
+    if ($request->customer_id != 0) {
+        $transaction->customer_id = $request->customer_id;
+    }
+
+    $transaction->invoice = $request->invoice;
+    $transaction->invoice_no = $request->invoice_no;
+    $transaction->total = $request->total;
+    $transaction->discount = $request->discount;
+    $transaction->payment_method_id = $paymentMethod->id;
+    $transaction->amount = $request->amount;
+    $transaction->change = $request->change;
+    $transaction->note = $request->note;
+    $transaction->save();
+
+    $this->move_cart($transaction);
+
+    return json_encode([
+        'status' => 'success',
+        'message' => 'Transaksi berhasil'
+    ]);
+}
+
 
     public function destroy(Transaction $transaction): RedirectResponse
     {
@@ -133,4 +150,6 @@ class TransactionController extends Controller
         $invoice = env('INVOICE_PREFIX') . date('dmy') . str_pad($invoice, 4, "0", STR_PAD_LEFT);
         return json_encode(['invoice' => $invoice, 'invoice_no' => $invoice_no]);
     }
+
+    
 }

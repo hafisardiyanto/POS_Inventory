@@ -212,14 +212,15 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="payment_method" class="form-label">
-                <b>Metode Pembayaran <span class="text-danger">*</span></b>
-              </label>
-              <select class="form-select" id="payment_method">
-                @foreach ($payment_methods as $payment_method)
-                  <option value="{{ $payment_method->name }}" selected>{{ $payment_method->name }}</option>
-                @endforeach
-              </select>
+             <label for="payment_method">Metode Pembayaran</label>
+    <select name="payment_method" id="payment_method" class="form-control" required>
+        <option value="">-- Pilih Metode Pembayaran --</option>
+        @foreach ($payment_methods as $method)
+            <option value="{{ $method->name }}">
+                {{ $method->name }}
+            </option>
+        @endforeach
+    </select>
             </div>
           </div>
           <div class="col">
