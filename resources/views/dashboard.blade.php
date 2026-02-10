@@ -9,7 +9,7 @@
   <div class="row">
     <!-- Column -->
     <div class="col-md-4">
-      <a href="http://pos.me/item">
+      <a href="{{ url('/item') }}">
         <div class="card card-hover">
           <div class="box bg-danger">
             <div class="row align-items-center">
