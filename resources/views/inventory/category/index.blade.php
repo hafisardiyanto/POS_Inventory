@@ -37,7 +37,7 @@
     });
 
     function exportData(type) {
-      window.location.href = "/category/export?type=" + type;
+      window.location.href = "{{ route('category.export') }}?type=" + type;
     }
   </script>
 </x-layout>

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CategoryController extends Controller
 {
@@ -70,5 +73,11 @@ class CategoryController extends Controller
     $category->delete();
 
     return redirect()->route('category.index')->with('status', 'Kategori berhasil dihapus');
+  }
+
+  public function export(Request $request): BinaryFileResponse
+  {
+    $type = $request->type ?? 'xlsx';
+    return Excel::download(new CategoriesExport, 'categories.' . $type);
   }
 }

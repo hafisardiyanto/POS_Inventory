@@ -20,13 +20,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
+        // Super Admin (Full Access)
+        User::create([
+            'name' => 'Super Admin',
+            'username' => '
+            ',
+            'email' => 'superadmin@example.com',
+            'phone' => '081234567890',
+            'password' => Hash::make('admin123'),
+            'role' => 'owner', // Role owner memiliki akses penuh di IsSupervisor middleware
+        ]);
+
+        // Admin (Supervisor Access)
+        User::create([
+            'name' => 'Admin Utama',
             'username' => 'admin',
-            'password' => Hash::make('4dm1n@123'),
-            'role' => 'owner'
+            'email' => 'admin@example.com',
+            'phone' => '081234567891',
+            'password' => Hash::make('admin123'),
+            'role' => 'supervisor', // Role supervisor juga diizinkan di IsSupervisor middleware
         ]);
 
         PaymentMethod::create(['name' => 'Tunai']);

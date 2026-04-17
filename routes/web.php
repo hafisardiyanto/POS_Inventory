@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'inventory'], function () {
+        Route::get('category/export', [CategoryController::class, 'export'])->name('category.export');
         Route::resource('category', CategoryController::class)->except('show');
         Route::resource('supplier', SupplierController::class);
         Route::resource('item', ItemController::class);
