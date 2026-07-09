@@ -25,8 +25,7 @@ class DatabaseSeeder extends Seeder
         // Super Admin (Full Access)
         User::create([
             'name' => 'Super Admin',
-            'username' => '
-            ',
+            'username' => 'superadmin',
             'email' => 'superadmin@example.com',
             'phone' => '081234567890',
             'password' => Hash::make('admin123'),
