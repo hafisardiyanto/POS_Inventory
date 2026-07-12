@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index(): View
     {
         return view('customer.index', [
-            'customers' => Customer::with('transactions')->get(),
+            'customers' => Customer::withCount('transactions')->get(),
             'type' => 'show'
         ]);
     }

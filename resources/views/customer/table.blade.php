@@ -16,13 +16,13 @@
         <td style="width: 10%;">{{ $loop->iteration }}</td>
         <td>{{ $customer->name }}</td>
         <td>{{ $customer->phone }}</td>
-        <td align="center">{{ count($customer->transactions) }}</td>
+        <td align="center">{{ $customer->transactions_count }}</td>
         @if ($type != 'export')
           <td class="text-center" style="width: 25%;">
             {{-- <button class="btn btn-sm rounded-3 text-white btn-secondary" data-bs-toggle="modal"
               data-bs-target="#detail-modal" data-name="{{ $customer->name }}"
               data-phone="{{ $customer->phone }}"data-address="{{ $customer->address }}"
-              data-transactions="{{ count($customer->transactions) }}" id="detail-btn">
+              data-transactions="{{ $customer->transactions_count }}" id="detail-btn">
               <i class="fas fa-info-circle"></i> Detil
             </button> --}}
             <a href="{{ route('customer.show', $customer->id) }}" class="btn btn-sm rounded-3 text-white btn-secondary">
