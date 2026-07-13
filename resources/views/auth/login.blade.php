@@ -44,7 +44,7 @@
           <div class="text-center pt-3 pb-3">
             <span class="db">
               <img src="assets/images/icon.png" alt="logo" class="light-logo" />
-              <b class="text-white">POS Login inventory</b>
+              <b class="text-white">POS Kasir Login </b>
             </span>
           </div>
           <!-- Form -->
@@ -85,9 +85,9 @@
               <div class="col-12">
                 <div class="form-group">
                   <button class="btn btn-success float-end text-white" type="submit">
-                    Login 
+                    Login
                   </button>
-                </div>  
+                </div>
               </div>
             </div>
           </form>
