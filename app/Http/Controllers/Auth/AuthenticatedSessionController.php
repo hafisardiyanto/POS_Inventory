@@ -45,7 +45,9 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $absence = Absence::where('user_id', Auth::id())->latest()->first();
-        $absence->update(['logout_at' => date('H:i')]);
+        if ($absence) {
+            $absence->update(['logout_at' => date('H:i')]);
+        }
 
         Auth::guard('web')->logout();
 
