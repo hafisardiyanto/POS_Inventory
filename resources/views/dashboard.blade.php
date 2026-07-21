@@ -9,7 +9,7 @@
   <div class="row">
     <!-- Column -->
     <div class="col-md-4">
-      <a href="{{ url('/item') }}">
+      <a href="{{ route('item.index') }}">
         <div class="card card-hover">
           <div class="box bg-danger">
             <div class="row align-items-center">
